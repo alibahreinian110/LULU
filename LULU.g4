@@ -1,5 +1,6 @@
 grammar LULU;
 ft_def : type_def | fun_def ;
+
 type_def : 'type' ID (':' ID)? '{' (component)+ '}';
 component : ACCESS_MODIFIER? ( var_def | fun_def );
 var_def : 'const'? TYPE var_val (',' var_val)* ';';
@@ -12,6 +13,13 @@ assign : ( var | '(' var (',' var )* ')') '=' expr ;
 var : (('this' | 'super')'.')? ref ('.' ref )* ;
 ref : ID ('[' expr ']')* ;
 expr : expr BINARY_OP expr  | '(' expr ')' | UNARY_OP  expr | CONST_VAL | 'allocate' handle_call | func_call | var | list | 'nil' ;
+func_call : (var '.')? handle_call | 'read' '(' ')' | 'write' '(' expr ')' ;
+list : '[' (expr | list ) (','(expr | list ))* ']' ;
+handle_call : ID '(' params? ')' ;
+params : expr | expr ',' params ;
+cond_stmt : 'if' expr ( block | stmt ) ('else' ( block | stmt ))? | 'switch' var '{' switch_body '}' ;
+switch_body : ('caseof' INT_CONST ':' block )+ ('default' ':' block)? ;
+loop_stmt : 'for' (TYPE? assign )? ';' expr ';' assign? block | 'while' expr ( block | stmt) ;
 
 
 
