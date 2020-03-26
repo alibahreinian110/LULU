@@ -19,7 +19,7 @@ LOWERCASE : [a-z];
 UPERCASE  : [A-Z];
 TYPE :  'int' | 'bool' | 'float' | 'string' | ID  | 'type';
 ACCESS_MODIFIER : 'public' | 'private' | 'protected';
-ID : (LOWERCASE* UPERCASE* | '@' | '_')+ DIGITS* ([a-z][A-z] | '@' | '_' | [0-9])*;
+ID : (LOWERCASE* UPERCASE* | '@' | '_')+ DIGITS* ([a-z][A-z] | '@' | '_' | DIGITS)*;
 RALATION_OP : '==' | '!=' | '<=' | '>=' | '>' | '<';
 BITWISE_OP: '~' | '|' | '&';
 LOGIC_OP : '!' | '||' | '&&';
