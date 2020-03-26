@@ -1,4 +1,5 @@
 grammar LULU;
+program : ft_def;
 ft_def : type_def | fun_def ;
 
 type_def : 'type' ID (':' ID)? '{' (component)+ '}';
