@@ -24,9 +24,9 @@ LOGIC_OP : '!' | '||' | '&&';
 
 ARITHMATIC_OP : '+' | '-' | '*' | '/' | '%';
 
-WHITESPACE : ' '* | '\t'*;
+WHITESPACE : ' '+ | '\t'+;
 
-NEWLINE : '\r' | '\n' | '\n\r';
+NEWLINE : '\r'+ | '\n'+ | '\n\r'+;
 
 HEX_DIGITS :   ('a' | 'A' | 'b' | 'B' | 'C' |'c' | 'd' | 'D' | 'e' | 'E' | 'f' | 'F');
 HEX_NUMBERS : ('0h' | '0H')(HEX_DIGITS* DIGITS*)*
