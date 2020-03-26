@@ -1,5 +1,5 @@
 grammar LULU;
-args_var : TYPE ('[' ']')* ID | args_var ',' TYPE ('[' ']')* ID
+args_var : TYPE ('[' ']')* ID | args_var ',' TYPE ('[' ']')* ID;
 
 
 
@@ -29,9 +29,9 @@ WHITESPACE : ' '+ | '\t'+;
 NEWLINE : '\r'+ | '\n'+ | '\n\r'+;
 
 HEX_DIGITS :   ('a' | 'A' | 'b' | 'B' | 'C' |'c' | 'd' | 'D' | 'e' | 'E' | 'f' | 'F');
-HEX_NUMBERS : ('0h' | '0H')(HEX_DIGITS* DIGITS*)*
+HEX_NUMBERS : ('0h' | '0H')(HEX_DIGITS* DIGITS*)*;
 INT_CONST : DIGITS+ | HEX_NUMBERS+;
-REAL_CONST : (DIGITS*'.'DIGITS*)+ | (HEX_NUMBERS'.'HEX_NUMBERS)+ | DIGITS+'^'(+ | -)?DIGITS+;
+REAL_CONST : (DIGITS*'.'DIGITS*)+ | (HEX_NUMBERS'.'HEX_NUMBERS)+ | DIGITS+'^'('+' | '-')?DIGITS+;
 BOOL_CONST : 'true' | 'false';
 
 
