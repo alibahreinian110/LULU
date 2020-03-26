@@ -1,5 +1,14 @@
 grammar LULU;
-args_var : TYPE ('[' ']')* ID | args_var ',' TYPE ('[' ']')* ID
+ft_def : type_def | fun_def ;
+type_def : "type" ID (':' ID)? '{' (component)+ '}';
+component : ACCESS_MODIFIER? ( var_def | fun_def );
+var_def : "const"? TYPE var_val (',' var_val)* ';';
+var_val : ref ('=' expr)? ;
+fun_def : ('(' args_var ')' '=' )? "function" ID '(' args_var?  ')' block ;
+args_var : TYPE ('[' ']')* ID | args_var ',' TYPE ('[' ']')* ID;
+block : '{' (var_def | stmt )* '}';
+
+
 
 
 
