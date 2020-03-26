@@ -23,6 +23,7 @@ LOGIC_OP : '!' | '||' | '&&';
 ARITHMATIC_OP : '+' | '-' | '*' | '/' | '%';
 
 BINARY_OP : ARITHMATIC_OP | RELATION_OP | BITWISE_OP | LOGIC_OP;
+UNARY_OP  : '-' | '!' | '~';
 
 WHITESPACE : ' '+ | '\t'+;
 
