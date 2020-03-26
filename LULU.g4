@@ -15,7 +15,11 @@ grammar LULU;
 
 
 DIGITS :[0-9];
-ID : ([a-z][A-z] | '@' | '_')+ DIGITS* ([a-z][A-z] | '@' | '_' | [0-9])*;
+LOWERCASE : [a-z];
+UPERCASE  : [A-Z];
+TYPE :  'int' | 'bool' | 'float' | 'string' | ID  | 'type';
+ACCESS_MODIFIER : 'public' | 'private' | 'protected';
+ID : (LOWERCASE* UPERCASE* | '@' | '_')+ DIGITS* ([a-z][A-z] | '@' | '_' | [0-9])*;
 RALATION_OP : '==' | '!=' | '<=' | '>=' | '>' | '<';
 BITWISE_OP: '~' | '|' | '&';
 LOGIC_OP : '!' | '||' | '&&';
