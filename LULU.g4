@@ -23,8 +23,6 @@ ID : (LOWERCASE* UPERCASE* | '@' | '_')+ DIGITS* ([a-z][A-z] | '@' | '_' | DIGIT
 RALATION_OP : '==' | '!=' | '<=' | '>=' | '>' | '<';
 BITWISE_OP: '~' | '|' | '&';
 LOGIC_OP : '!' | '||' | '&&';
-KEYWORD : 'allocate' | 'bool' | 'break' | 'caseof' | 'const' | 'continue' | 'default' | 'destruct' | 'else' | 'false' | 'function' | 'float' | 'for' | 'if' | 'int' | 'nill' | 'true' | 'type' | 'while' | 'write'
-      'private' | 'protected' | 'public' | 'read' | 'string' | 'super' | 'switch' | 'this';
 
 
 ARITHMATIC_OP : '+' | '-' | '*' | '/' | '%';
