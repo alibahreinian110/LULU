@@ -14,21 +14,21 @@ grammar LULU;
 
 
 
-Digits :[0-9];
-Id : ([a-z][A-z] | '@' | '_')+ Digits* ([a-z][A-z] | '@' | '_' | [0-9])*;
-ralation_op : '==' | '!=' | '<=' | '>=' | '>' | '<';
-bitwise_op: '~' | '|' | '&';
-logic_op : '!' | '||' | '&&';
-keyword : 'allocate' | 'bool' | 'break' | 'caseof' | 'const' | 'continue' | 'default' | 'destruct' | 'else' | 'false' | 'function' | 'float' | 'for' | 'if' | 'int' | 'nill' | 'true' | 'type' | 'while' | 'write'
+DIGITS :[0-9];
+ID : ([a-z][A-z] | '@' | '_')+ DIGITS* ([a-z][A-z] | '@' | '_' | [0-9])*;
+RALATION_OP : '==' | '!=' | '<=' | '>=' | '>' | '<';
+BITWISE_OP: '~' | '|' | '&';
+LOGIC_OP : '!' | '||' | '&&';
+KEYWORD : 'allocate' | 'bool' | 'break' | 'caseof' | 'const' | 'continue' | 'default' | 'destruct' | 'else' | 'false' | 'function' | 'float' | 'for' | 'if' | 'int' | 'nill' | 'true' | 'type' | 'while' | 'write'
       'private' | 'protected' | 'public' | 'read' | 'string' | 'super' | 'switch' | 'this';
 
 
-arithmetic_op : '+' | '-' | '*' | '/' | '%';
+ARITHMATIC_OP : '+' | '-' | '*' | '/' | '%';
 
-whitespace : ' '* | '\t'*;
+WHITESPACE : ' '* | '\t'*;
 
-newline : '\r' | '\n' | '\n\r';
+NEWLINE : '\r' | '\n' | '\n\r';
 
-Hex :   ('a' | 'A' | 'b' | 'B' | 'C' |'c' | 'd' | 'D' | 'e' | 'E' | 'f' | 'F');
+HEX :   ('a' | 'A' | 'b' | 'B' | 'C' |'c' | 'd' | 'D' | 'e' | 'E' | 'f' | 'F');
 
-Int_const : [0-9]+ | ('0h' | '0H')(Hex* Digits*)*;
+INT_CONST : [0-9]+ | ('0h' | '0H')(HEX* DIGITS*)*;
