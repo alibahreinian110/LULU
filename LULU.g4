@@ -23,3 +23,7 @@ keyword : 'allocate' | 'bool' | 'break' | 'caseof' | 'const' | 'continue' | 'def
 
 
 arithmetic_op : '+' | '-' | '*' | '/' | '%';
+
+whitespace : ' '* | '\t'*
+
+newline : '\r' | '\n' | '\n\r'
