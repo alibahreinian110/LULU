@@ -1,8 +1,5 @@
 grammar LULU;
-
-
-
-
+args_var : TYPE ('[' ']')* ID | args_var ',' TYPE ('[' ']')* ID
 
 
 
