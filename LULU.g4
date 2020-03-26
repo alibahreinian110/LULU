@@ -17,12 +17,12 @@ UPERCASE  : [A-Z];
 TYPE :  'int' | 'bool' | 'float' | 'string' | ID  | 'type';
 ACCESS_MODIFIER : 'public' | 'private' | 'protected';
 ID : (LOWERCASE* UPERCASE* | '@' | '_')+ DIGITS* (LOWERCASE* UPERCASE* | '@' | '_' | DIGITS*)*;
-RALATION_OP : '==' | '!=' | '<=' | '>=' | '>' | '<';
+RELATION_OP : '==' | '!=' | '<=' | '>=' | '>' | '<';
 BITWISE_OP: '~' | '|' | '&';
 LOGIC_OP : '!' | '||' | '&&';
-
-
 ARITHMATIC_OP : '+' | '-' | '*' | '/' | '%';
+
+BINARY_OP : ARITHMATIC_OP | RELATION_OP | BITWISE_OP | LOGIC_OP;
 
 WHITESPACE : ' '+ | '\t'+;
 
@@ -33,6 +33,9 @@ HEX_NUMBERS : ('0h' | '0H')(HEX_DIGITS* DIGITS*)*;
 INT_CONST : DIGITS+ | HEX_NUMBERS+;
 REAL_CONST : (DIGITS*'.'DIGITS*)+ | (HEX_NUMBERS'.'HEX_NUMBERS)+ | DIGITS+'^'('+' | '-')?DIGITS+;
 BOOL_CONST : 'true' | 'false';
+ESCAPE_CHARS : '\t' | '\n' | '\r' | '\0' | '\\';
+TEXT :  ESCAPE_CHARS*LOWERCASE*UPERCASE*WHITESPACE*DIGITS;
+STRING_CONST : '"'TEXT*'"';
 
 
-CONST_VAL : INT_CONST | REAL_CONST | BOOL_CONST;
+CONST_VAL : INT_CONST | REAL_CONST | BOOL_CONST | STRING_CONST;
