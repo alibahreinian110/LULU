@@ -53,3 +53,21 @@ class LULUListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LULUParser#whitespace.
+    def enterWhitespace(self, ctx:LULUParser.WhitespaceContext):
+        pass
+
+    # Exit a parse tree produced by LULUParser#whitespace.
+    def exitWhitespace(self, ctx:LULUParser.WhitespaceContext):
+        pass
+
+
+    # Enter a parse tree produced by LULUParser#newline.
+    def enterNewline(self, ctx:LULUParser.NewlineContext):
+        pass
+
+    # Exit a parse tree produced by LULUParser#newline.
+    def exitNewline(self, ctx:LULUParser.NewlineContext):
+        pass
+
+

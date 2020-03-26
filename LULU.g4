@@ -14,8 +14,8 @@ grammar LULU;
 
 
 
-digits  : [0-9]*;
-id  : ([a-z] | [A-Z] | '@' | '_')+ digits ([a-z] | [A-Z] | '@' | '_' | [0-9])*;
+Digits :[0-9];
+Id : ([a-z][A-z] | '@' | '_')+ Digits* ([a-z][A-z] | '@' | '_' | [0-9])*;
 ralation_op : '==' | '!=' | '<=' | '>=' | '>' | '<';
 bitwise_op: '~' | '|' | '&';
 logic_op : '!' | '||' | '&&';
@@ -29,6 +29,6 @@ whitespace : ' '* | '\t'*;
 
 newline : '\r' | '\n' | '\n\r';
 
-hex :   ('a' | 'A' | 'b' | 'B' | 'C' |'c' | 'd' | 'D' | 'e' | 'E' | 'f' | 'F')*;
+Hex :   ('a' | 'A' | 'b' | 'B' | 'C' |'c' | 'd' | 'D' | 'e' | 'E' | 'f' | 'F');
 
-int_const : [0-9]+ | 0('h' | 'H')(hex digits)*;
+Int_const : [0-9]+ | ('0h' | '0H')(Hex* Digits*)*;
