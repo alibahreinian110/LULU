@@ -51,7 +51,7 @@ INT_CONST : DIGITS+ | HEX_NUMBERS+;
 REAL_CONST : (DIGITS*'.'DIGITS*)+ | (HEX_NUMBERS'.'HEX_NUMBERS)+ | DIGITS+'^'('+' | '-')?DIGITS+;
 BOOL_CONST : 'true' | 'false';
 
-fragment ESCAPE_CHARS : '\t' | '\n' | '\r' | '\0' | '\\';
+fragment ESCAPE_CHARS : '\t' | '\n' | '\r' | '\\';
 fragment TEXT :  ESCAPE_CHARS*LOWERCASE*UPERCASE*WHITESPACE*DIGITS;
 STRING_CONST : '"'TEXT*'"';
 
