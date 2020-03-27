@@ -24,7 +24,7 @@ Int : 'int';
 Bool : 'bool';
 Float : 'float';
 String : 'string';
-ID :  ('@' | '_' | UPERCASE LOWERCASE)('@' | '_' | UPERCASE LOWERCASE | DIGITS)*;
+ID :  ('@' | '_' | LETTER)('@' | '_' | LETER | DIGITS)*;
 Type :  Int | Bool | Float | String | ID  | 'type';
 Private : 'private';
 Public : 'public';
