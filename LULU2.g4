@@ -9,9 +9,6 @@ type : Int | Bool | Float | String | Id | Type ;
 var_val : ref ('=' expr);
 ref : Id ('['expr']')*;
 expr : expr binary_op expr | '(' expr ')' | unary_op expr| const_val| 'allocate' handle_call | func_call | var | list | list | 'nil' ;
-binary_op : arithmatic | relational | bitwise | logical;
-arithmatic : Addition | Subtraction | Multipliction | Division | Modulus;
-relational : Equal | Not_Equal | Less_Than_or_Equal | Bigger_than_or_equal | Less_than | Bigger_than ;
 fun_def :('('args_var')''=')? 'function' ID '(' (args_var)? ')' block;
 
 
@@ -42,8 +39,8 @@ Bigger_than : '>';
 Bigger_than_or_equal : '>=';
 CONST : 'const'
 
-Arithmatic : '+' | '-' | '*' | '/' |'%';
-Relational : '==' | '!==' | '<=' | '>=' | '<' | '>';
+Arithmatic : Addition | Subtraction | Multipliction | Division | Modulus;;
+Relational : Equal | Not_Equal | Less_Than_or_Equal | Bigger_than_or_equal | Less_than | Bigger_than ;
 Bitwise : '|' | '&';
 Logical : '?';
 // TODO: logical operators lexer should be added
