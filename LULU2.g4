@@ -17,15 +17,15 @@ fun_def :('('args_var')''=')? 'function' ID '(' (args_var)? ')' block;
 
 
 
-DIGIT : [0-9];
-DIGITS : DIGIT*;
-LETTER : [a-zA-Z];
+fragment DIGIT : [0-9];
+fragment DIGITS : DIGIT*;
+fragment LETTER : [a-zA-Z];
 Int : 'int';
 Bool : 'bool';
 Float : 'float';
 String : 'string';
-//Id : ?;
-//Type : ?;
+ID :  ('@' | '_' | LETTER)('@' | '_' | LETER | DIGITS)*;
+Type :  Int | Bool | Float | String | ID  | 'type';
 Private : 'private';
 Public : 'public';
 Protected : 'protected';
