@@ -5,10 +5,9 @@ type_def : 'type' ID (':' ID)? '{' component+ '}';
 component : (access_modifier)?(var_def | fun_def);
 access_modifier : Private | Public | Protected;
 var_def : 'const'? type var_val (',' var_val ',')*';';
-type : Int | Bool | Float | String | Id | Type ;
 var_val : ref ('=' expr);
 ref : Id ('['expr']')*;
-expr : expr binary_op expr | '(' expr ')' | unary_op expr| const_val| 'allocate' handle_call | func_call | var | list | list | 'nil' ;
+expr : expr Binary_op expr | '(' expr ')' | unary_op expr| const_val| 'allocate' handle_call | func_call | var | list | list | 'nil' ;
 fun_def :('('args_var')''=')? 'function' ID '(' (args_var)? ')' block;
 
 
