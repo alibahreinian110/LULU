@@ -8,6 +8,15 @@ else:
 # This class defines a complete listener for a parse tree produced by LULUParser.
 class LULUListener(ParseTreeListener):
 
+    # Enter a parse tree produced by LULUParser#program.
+    def enterProgram(self, ctx:LULUParser.ProgramContext):
+        pass
+
+    # Exit a parse tree produced by LULUParser#program.
+    def exitProgram(self, ctx:LULUParser.ProgramContext):
+        pass
+
+
     # Enter a parse tree produced by LULUParser#ft_def.
     def enterFt_def(self, ctx:LULUParser.Ft_defContext):
         pass
