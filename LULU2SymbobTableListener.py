@@ -31,7 +31,8 @@ class LULU2SymbolTableListener(LULU2Listener):
             self.output.write(f'----{ctx.getText()}----')
 
     def exitComponent(self, ctx:LULU2Parser.ComponentContext):
-        pass
+        if ctx.block():
+            self.output.write(f'----End of {ctx.getText()}----')
 
     def enterFun_def(self, ctx:LULU2Parser.Fun_defContext):
         output.write("----%s----"%ctx.ID().getText())
@@ -44,14 +45,16 @@ class LULU2SymbolTableListener(LULU2Listener):
             self.output.write(f'----{ctx.getText()}----')
 
     def exitStmt(self, ctx:LULU2Parser.StmtContext):
-        pass
-
-    def enterCond_stmt(self, ctx:LULU2Parser.Cond_stmtContext):
-        if ctx.block:
+        if ctx.block():
             self.output.write(f'----{ctx.getText()}----')
 
+    def enterCond_stmt(self, ctx:LULU2Parser.Cond_stmtContext):
+        if ctx.block():
+            self.output.write(f'----End of {ctx.getText()}----')
+
     def exitCond_stmt(self, ctx:LULU2Parser.Cond_stmtContext):
-        pass
+        if ctx.block():
+            self.output.write(f'----End of {ctx.getText()}----')
 
     def enterSwitch_body(self, ctx:LULU2Parser.Switch_bodyContext):
         output.write("----%s----"%ctx.getText())
@@ -60,8 +63,9 @@ class LULU2SymbolTableListener(LULU2Listener):
         pass
 
     def enterLoop_stmt(self, ctx:LULU2Parser.Loop_stmtContext):
-        if ctx.block:
+        if ctx.block():
             self.output.write(f'----{ctx.getText()}----')
 
     def exitLoop_stmt(self, ctx:LULU2Parser.Loop_stmtContext):
-        pass
+        if ctx.block():
+            self.output.write(f'----End of {ctx.getText}----')
