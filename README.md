@@ -1,2 +1,0 @@
-# LULU
-compiler project

@@ -1,1 +1,0 @@
-$$ A sample program type myType {  public int x;  public (float y) = function myType(int z){ this.x = 10;   if z > this.x    y = 23.5;   else { y = 15.2; }  } } (int r) = function start(string a) {  const float c = 0.23;  int s = read();  float w;  (r, w) = f1(s); } (int x, float y) = function f1(int b) {  myType a = allocate myType();  y = a.x + b;  x = 0; }
