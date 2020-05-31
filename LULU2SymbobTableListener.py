@@ -9,19 +9,19 @@ class LULU2SymbolTableListener(LULU2Listener):
         self.output = output
 
     def enterProgram(self, ctx:LULU2Parser.ProgramContext):
-        pass
+        output.write("----Program----")
 
     def exitProgram(self, ctx:LULU2Parser.ProgramContext):
         pass
 
     def enterFt_def(self, ctx:LULU2Parser.Ft_defContext):
-        pass
+        output.write("----Ft_def----")
 
     def exitFt_def(self, ctx:LULU2Parser.Ft_defContext):
         pass
 
     def enterType_def(self, ctx:LULU2Parser.Type_defContext):
-        pass
+        output.write("----%s----"%ctx.ID()[0].getText())
 
     def exitType_def(self, ctx:LULU2Parser.Type_defContext):
         pass
@@ -33,7 +33,7 @@ class LULU2SymbolTableListener(LULU2Listener):
         pass
 
     def enterFun_def(self, ctx:LULU2Parser.Fun_defContext):
-        pass
+        output.write("----%s----"%ctx.ID().getText())
 
     def exitFun_def(self, ctx:LULU2Parser.Fun_defContext):
         pass
@@ -51,7 +51,7 @@ class LULU2SymbolTableListener(LULU2Listener):
         pass
 
     def enterSwitch_body(self, ctx:LULU2Parser.Switch_bodyContext):
-        pass
+        output.write("----Switch----")
 
     def exitSwitch_body(self, ctx:LULU2Parser.Switch_bodyContext):
         pass
