@@ -8,8 +8,10 @@ class LULU2SymbolTableListener(LULU2Listener):
     def __init__(self, output):
         self.output = output
 
+
     def enterProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----%s----"%ctx.getText())
+        self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----End of %s"%ctx.getText())
