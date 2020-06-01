@@ -22,12 +22,12 @@ class LULU2SymbolTableListener(LULU2Listener):
             else ctx.args_var():
                 child.args_var()
                 self.output.wirte(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
-        self.indicateVariable(ctx)
 
 
     def enterProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----%s----"%ctx.getText())
         self.output.write('Name    |    Type    |    Width    |    Address')
+        self.indicateVariable(ctx)
 
     def exitProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----End of %s"%ctx.getText())
