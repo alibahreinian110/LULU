@@ -7,25 +7,26 @@ from LULU2Listener import LULU2Listener
 class LULU2SymbolTableListener(LULU2Listener):
     def __init__(self, output):
         self.output = output
-
-
-    def enterProgram(self, ctx:LULU2Parser.ProgramContext):
-        self.output.write("----%s----"%ctx.getText())
-        self.output.write('Name    |    Type    |    Width    |    Address')
-        def indicateVariable(self,ctx):
+    
+    def indicateVariable(self,ctx):
         for i in range(ctx.getChildCount()):
             if ctx.type_def():
                 child = ctx.type_def()
                 self.output.write(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
             elif ctx.var_def():
                 child = ctx.var_def()
-                self.output.wirte(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
+                self.output.wirte(f'{child.var_val().ref().ID().getText()}         {child.Type().getText()}         Width         Address')                
             elif ctx.fun_def():
                 child = ctx.fun_def()
                 self.output.wirte(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
             else ctx.args_var():
                 child.args_var()
                 self.output.wirte(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
+
+
+    def enterProgram(self, ctx:LULU2Parser.ProgramContext):
+        self.output.write("----%s----"%ctx.getText())
+        self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----End of %s"%ctx.getText())
