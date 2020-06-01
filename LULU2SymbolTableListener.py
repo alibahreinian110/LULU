@@ -18,12 +18,14 @@ class LULU2SymbolTableListener(LULU2Listener):
 
     def enterFt_def(self, ctx:LULU2Parser.Ft_defContext):
         self.output.write("----%s----"%ctx.getText())
+        self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitFt_def(self, ctx:LULU2Parser.Ft_defContext):
         self.output.write("----End of %s----"%ctx.getText())
 
     def enterType_def(self, ctx:LULU2Parser.Type_defContext):
         self.output.write("----%s----"%ctx.ID()[0].getText())
+        self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitType_def(self, ctx:LULU2Parser.Type_defContext):
         self.output.write("----End of %s----"%ctx.ID()[0].getText())
@@ -31,6 +33,7 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterComponent(self, ctx:LULU2Parser.ComponentContext):
         if ctx.block():
             self.output.write(f'----{ctx.getText()}----')
+            self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitComponent(self, ctx:LULU2Parser.ComponentContext):
         if ctx.block():
@@ -38,6 +41,7 @@ class LULU2SymbolTableListener(LULU2Listener):
 
     def enterFun_def(self, ctx:LULU2Parser.Fun_defContext):
         self.output.write("----%s----"%ctx.ID().getText())
+        self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitFun_def(self, ctx:LULU2Parser.Fun_defContext):
         self.output.write("----End of %s----"%ctx.ID().getText())
@@ -45,6 +49,7 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterStmt(self, ctx:LULU2Parser.StmtContext):
         if ctx.block():
             self.output.write(f'----{ctx.getText()}----')
+            self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitStmt(self, ctx:LULU2Parser.StmtContext):
         if ctx.block():
@@ -53,6 +58,7 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterCond_stmt(self, ctx:LULU2Parser.Cond_stmtContext):
         if ctx.block():
             self.output.write(f'----End of {ctx.getText()}----')
+            self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitCond_stmt(self, ctx:LULU2Parser.Cond_stmtContext):
         if ctx.block():
@@ -60,6 +66,7 @@ class LULU2SymbolTableListener(LULU2Listener):
 
     def enterSwitch_body(self, ctx:LULU2Parser.Switch_bodyContext):
         self.output.write("----%s----"%ctx.getText())
+        self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitSwitch_body(self, ctx:LULU2Parser.Switch_bodyContext):
         self.output.write("----End of %s----"%ctx.getText())
@@ -67,6 +74,7 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterLoop_stmt(self, ctx:LULU2Parser.Loop_stmtContext):
         if ctx.block():
             self.output.write(f'----{ctx.getText()}----')
+            self.output.write('Name    |    Type    |    Width    |    Address')
 
     def exitLoop_stmt(self, ctx:LULU2Parser.Loop_stmtContext):
         if ctx.block():
