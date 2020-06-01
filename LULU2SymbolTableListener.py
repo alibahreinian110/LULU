@@ -12,14 +12,20 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----%s----"%ctx.getText())
         self.output.write('Name    |    Type    |    Width    |    Address')
-        
+        def indicateVariable(self,ctx):
         for i in range(ctx.getChildCount()):
             if ctx.type_def():
                 child = ctx.type_def()
-                self.output.write(f'{child.ID().getText()}         {child.Type().getText()}         width         Address')
+                self.output.write(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
             elif ctx.var_def():
-                child = ctx.var_def():
-                self.output.wirte()
+                child = ctx.var_def()
+                self.output.wirte(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
+            elif ctx.fun_def():
+                child = ctx.fun_def()
+                self.output.wirte(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
+            else ctx.args_var():
+                child.args_var()
+                self.output.wirte(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
 
     def exitProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----End of %s"%ctx.getText())
