@@ -19,7 +19,7 @@ class LULU2SymbolTableListener(LULU2Listener):
             elif ctx.fun_def():
                 child = ctx.fun_def()
                 self.output.wirte(f'{child.ID().getText()}         {child.Function().getText()}         Width         Address')
-            else ctx.args_var():
+            elif ctx.args_var():
                 child.args_var()
                 self.output.wirte(f'{child.ID().getText()}         {child.type_().getText()}         Width         Address')
 
