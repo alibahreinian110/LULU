@@ -25,39 +25,35 @@ class LULU2SymbolTableListener(LULU2Listener):
         pass
 
     def enterProgram(self, ctx:LULU2Parser.ProgramContext):
-        self.output.write("----%s----\n"%ctx.getText())
-        self.output.write('Name    |    Type    |    Width    |    Address\n')
-
-        if ctx.ft_def():
-            print(ctx.ft_def())
-            # child = ctx.ft_def().type_def()
-            # self.output.write(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
-        elif ctx.var_def():
-            child = ctx.var_def()
-            self.output.wirte(f'{child.var_val().ref().ID().getText()}         {child.type_().getText()}         Width         Address')
-        elif ctx.fun_def():
-            child = ctx.fun_def()
-            self.output.wirte(f'{child.ID().getText()}         {child.Function().getText()}         Width         Address')
-        elif ctx.args_var():
-            child.args_var()
-            self.output.wirte(f'{child.ID().getText()}         {child.type_().getText()}         Width         Address')
-
+        self.output.write("----program----\n")
 
     def exitProgram(self, ctx:LULU2Parser.ProgramContext):
-        self.output.write("----End of %s\n\n"%ctx.getText())
+        self.output.write('---End of program----\n')
 
     def enterFt_def(self, ctx:LULU2Parser.Ft_defContext):
-        self.output.write("----%s----\n"%ctx.getText())
-        self.output.write('Name    |    Type    |    Width    |    Address\n')
-        self.indicateVariable(ctx)
+        #self.output.write("----%s----\n"%ctx.getText())
+        #self.output.write('Name    |    Type    |    Width    |    Address\n')
+
+        #if ctx.type_def():
+            
+        #self.indicateVariable(ctx)
+        pass
 
     def exitFt_def(self, ctx:LULU2Parser.Ft_defContext):
-        self.output.write("----End of %s----\n\n"%ctx.getText())
+        #self.output.write("----End of %s----\n\n"%ctx.getText())
+        pass
 
     def enterType_def(self, ctx:LULU2Parser.Type_defContext):
         self.output.write("----%s----\n"%ctx.ID()[0].getText())
         self.output.write('Name    |    Type    |    Width    |    Address\n')
-        self.indicateVariable(ctx)
+        
+        for component in ctx.component():
+             if component.var_def():
+                 for definition in component.var_def():
+
+                     for value in definition.var_val():
+                         self.output.write(f'{value.ref()[0].ID().getText()}         ')
+                         self.output.write(f'{definition.type_().getText()}         ')
 
     def exitType_def(self, ctx:LULU2Parser.Type_defContext):
         self.output.write("----End of %s----\n\n"%ctx.ID()[0].getText())
