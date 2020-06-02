@@ -1,1 +1,20 @@
-------------End of 
+----(intx)=functiontesting(inty){x=y;}(intarg)=functionstart(stringa){intx=testing(4);}<EOF>----
+Name    |    Type    |    Width    |    Address
+----(intx)=functiontesting(inty){x=y;}----
+Name    |    Type    |    Width    |    Address
+----testing----
+Name    |    Type    |    Width    |    Address
+----End of testing----
+
+----End of (intx)=functiontesting(inty){x=y;}----
+
+----(intarg)=functionstart(stringa){intx=testing(4);}----
+Name    |    Type    |    Width    |    Address
+----start----
+Name    |    Type    |    Width    |    Address
+----End of start----
+
+----End of (intarg)=functionstart(stringa){intx=testing(4);}----
+
+----End of (intx)=functiontesting(inty){x=y;}(intarg)=functionstart(stringa){intx=testing(4);}<EOF>
+
