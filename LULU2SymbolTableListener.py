@@ -3,16 +3,16 @@ from antlr4 import *
 from LULU2Parser import LULU2Parser
 from LULU2Listener import LULU2Listener
 
-def alocate_width(ctx):
+def alocate_width(ctx, offset=0):
     typeof = ctx.type_()
 
-    if typeof == 'int':
+    if typeof.Int():
         return 4
-    elif typeof == 'bool':
+    elif typeof.Bool():
         return 1
-    elif typeof == 'float':
+    elif typeof.Float():
         return 8
-    elif typeof == 'string':
+    elif typeof.String():
         value = ctx.var_val()
 
         if value.expr() and isinstance(value.expr(), LULU2Parser.Const_valContext):
@@ -20,6 +20,14 @@ def alocate_width(ctx):
 
             width = (len(text) * 2) + 2
             return width
+    elif typeof.Type():
+        return offset + 20
+    
+    elif typeof.Function():
+        return offset + 30
+    else:
+        return 0
+
 
 class LULU2SymbolTableListener(LULU2Listener):
     def __init__(self, output):
