@@ -46,20 +46,20 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterType_def(self, ctx:LULU2Parser.Type_defContext):
         self.output.write("----%s----\n"%ctx.ID()[0].getText())
         self.output.write('Name    |    Type    |    Width    |    Address\n')
+
         for component in ctx.component():
-            if component.fun_def():
+             if component.var_def():
+                 for definition in component.var_def():
+                     for value in definition.var_val():
+                         self.output.write(f'{value.ref()[0].ID().getText()}         ')
+                         self.output.write(f'{definition.type_().getText()}         /n')
+            elif component.fun_def():
                 for value in component.fun_def():
                      self.output.write(f'{value.ID().getText()}         ')
                      self.output.write("function         ")
 
     def exitType_def(self, ctx:LULU2Parser.Type_defContext):
         self.output.write("----End of %s----\n\n"%ctx.ID()[0].getText())
-
-    def enterVar_def(self, ctx:LULU2Parser.Var_defContext):
-
-        for value in ctx.var_val():
-            self.output.write(f'{value.ref()[0].ID().getText()}         ')
-            self.output.write(f'{ctx.type_().getText()}         /n')
 
     def enterComponent(self, ctx:LULU2Parser.ComponentContext):
         pass
@@ -71,8 +71,15 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterFun_def(self, ctx:LULU2Parser.Fun_defContext):
         self.output.write("----%s----\n"%ctx.ID().getText())
         self.output.write('Name    |    Type    |    Width    |    Address\n')
-    
-        definition = ctx.block()
+        for definition in fun_def.args_var():
+            self.output.write(f'{definition.ID().getText()}         ')
+            self.output.write(f'{definition.type_().getText()}         \n')
+        definition = fun_def.block()
+        if definition.var_def():
+            for value in definition.var_def():
+                for variable in value.var_val():
+                    self.output.Write(f'{variable.ref().ID().getText()}         ')
+                    self.output.write(f'{value.type_().getText()}         \n')
         if deinition.stmt():
             for statement in definition.stmt():
                 if statement.cond_stmt():
@@ -84,10 +91,6 @@ class LULU2SymbolTableListener(LULU2Listener):
 
     def exitFun_def(self, ctx:LULU2Parser.Fun_defContext):
         self.output.write("----End of %s----\n\n"%ctx.ID().getText())
-
-    def enterArgs_var(self, ctx:LULU2Parser.Args_varContext):
-        self.output.write(f'{ctx.ID().getText()}         ')
-        self.output.write(f'{ctx.type_().getText()}         \n')
 
     def enterStmt(self, ctx:LULU2Parser.StmtContext):
         if ctx.cond_stmt():
