@@ -58,7 +58,7 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterVar_def(self, ctx:LULU2Parser.Var_defContext):
 
         for value in ctx.var_val():
-            self.output.write(f'{value.ref()[0].ID().getText()}         ')
+            self.output.write(f'{value.ref().ID().getText()}         ')
             self.output.write(f'{ctx.type_().getText()}         /n')
 
     def enterComponent(self, ctx:LULU2Parser.ComponentContext):
@@ -72,7 +72,7 @@ class LULU2SymbolTableListener(LULU2Listener):
         self.output.write('Name    |    Type    |    Width    |    Address\n')
     
         definition = ctx.block()
-        if deinition.stmt():
+        if definition.stmt():
             for statement in definition.stmt():
                 if statement.cond_stmt():
                     self.output.write("if         ")

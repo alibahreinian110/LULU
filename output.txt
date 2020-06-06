@@ -1,10 +1,14 @@
 ----program----
 ----testing----
 Name    |    Type    |    Width    |    Address
+x         int         
+y         int         
 ----End of testing----
 
 ----start----
 Name    |    Type    |    Width    |    Address
-----End of start----
+arg         int         
+a         string         
+x         int         /n----End of start----
 
 ---End of program----
