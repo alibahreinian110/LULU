@@ -9,6 +9,7 @@ y         int
 Name    |    Type    |    Width    |    Address
 arg         int         
 a         string         
-x         int         /n----End of start----
+x         int         None        
+----End of start----
 
 ---End of program----

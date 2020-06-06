@@ -3,6 +3,23 @@ from antlr4 import *
 from LULU2Parser import LULU2Parser
 from LULU2Listener import LULU2Listener
 
+def alocate_width(ctx):
+    typeof = ctx.type_()
+
+    if typeof == 'int':
+        return 4
+    elif typeof == 'bool':
+        return 1
+    elif typeof == 'float':
+        return 8
+    elif typeof == 'string':
+        value = ctx.var_val()
+
+        if value.expr() and isinstance(value.expr(), LULU2Parser.Const_valContext):
+            text = value.expr().const_val().String_const().getText()
+
+            width = (len(text) * 2) + 2
+            return width
 
 class LULU2SymbolTableListener(LULU2Listener):
     def __init__(self, output):
@@ -58,8 +75,10 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterVar_def(self, ctx:LULU2Parser.Var_defContext):
 
         for value in ctx.var_val():
+            width = alocate_width(ctx)
             self.output.write(f'{value.ref().ID().getText()}         ')
-            self.output.write(f'{ctx.type_().getText()}         /n')
+            self.output.write(f'{ctx.type_().getText()}         ')
+            self.output.write(f'{width}        \n')
 
     def enterComponent(self, ctx:LULU2Parser.ComponentContext):
         pass
