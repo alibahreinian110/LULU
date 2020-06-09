@@ -3,51 +3,41 @@ from antlr4 import *
 from LULU2Parser import LULU2Parser
 from LULU2Listener import LULU2Listener
 
-def alocate_width(ctx, offset=0):
-    typeof = ctx.type_()
 
-    if typeof.Int():
-        return 4
-    elif typeof.Bool():
-        return 1
-    elif typeof.Float():
-        return 8
-    elif typeof.String():
-        value = ctx.var_val()
-
-        if value.expr() and isinstance(value.expr(), LULU2Parser.Const_valContext):
-            text = value.expr().const_val().String_const().getText()
-
-            width = (len(text) * 2) + 2
-            return width
-    elif typeof.Type():
-        return offset + 20
-    
-    elif typeof.Function():
-        return offset + 30
+def alocate_array_width(array):
+    if type(array) == str:
+        return len(array)*2
     else:
-        return 0
+        return len(array)
+
+
+def alocate_width(ctx):
+
+    # for use in fun_def()
+    if isinstance(ctx, LULU2Parser.Fun_defContext):
+        return 30
+
+    # for use in type_def()
+    elif isinstance(ctx, LULU2Parser.Type_defContext):
+        return 20
+    
+    # for use in var_def() and args_var()
+    elif isinstance(ctx, LULU2Parser.Var_defContext) or isinstance(ctx, LULU2Parser.Args_varContext):
+        if ctx.type_().Int():
+            return 4
+        elif ctx.type_().Bool():
+            return 1
+        elif ctx.type_().Float():
+            return 8
+        elif ctx.type_().String():
+            return 2
+        else:
+            return 0
 
 
 class LULU2SymbolTableListener(LULU2Listener):
     def __init__(self, output):
         self.output = output
-
-    def indicateVariable(self,ctx):
-       # for i in range(ctx.getChildCount()):
-        #    if ctx.type_def():
-         #       child = ctx.type_def()
-          #      self.output.write(f'{child.ID().getText()}         {child.Type().getText()}         Width         Address')
-           # elif ctx.var_def():
-            #    child = ctx.var_def()
-             #   self.output.wirte(f'{child.var_val().ref().ID().getText()}         {child.type_().getText()}         Width         Address')
-            #elif ctx.fun_def():
-             #   child = ctx.fun_def()
-              #  self.output.wirte(f'{child.ID().getText()}         {child.Function().getText()}         Width         Address')
-            #elif ctx.args_var():
-             #   child.args_var()
-              #  self.output.wirte(f'{child.ID().getText()}         {child.type_().getText()}         Width         Address')
-        pass
 
     def enterProgram(self, ctx:LULU2Parser.ProgramContext):
         self.output.write("----program----\n")
@@ -56,16 +46,9 @@ class LULU2SymbolTableListener(LULU2Listener):
         self.output.write('---End of program----\n')
 
     def enterFt_def(self, ctx:LULU2Parser.Ft_defContext):
-        #self.output.write("----%s----\n"%ctx.getText())
-        #self.output.write('Name    |    Type    |    Width    |    Address\n')
-
-        #if ctx.type_def():
-
-        #self.indicateVariable(ctx)
         pass
 
     def exitFt_def(self, ctx:LULU2Parser.Ft_defContext):
-        #self.output.write("----End of %s----\n\n"%ctx.getText())
         pass
 
     def enterType_def(self, ctx:LULU2Parser.Type_defContext):
@@ -78,15 +61,36 @@ class LULU2SymbolTableListener(LULU2Listener):
                      self.output.write("function         ")
 
     def exitType_def(self, ctx:LULU2Parser.Type_defContext):
+        width = alocate_width(ctx)
         self.output.write("----End of %s----\n\n"%ctx.ID()[0].getText())
 
     def enterVar_def(self, ctx:LULU2Parser.Var_defContext):
+        addon = 0
+        multon = 0
+        width = alocate_width(ctx)
 
         for value in ctx.var_val():
-            width = alocate_width(ctx)
+            # calculating string const
+            if ctx.type_().String():
+                if value.expr().const_val():
+                    addon = alocate_array_width(value.expr().getText())
+            
+            # calculation of arrays
+            if value.ref().expr():
+                multon = alocate_array_width(value.ref().expr())
+
             self.output.write(f'{value.ref().ID().getText()}         ')
             self.output.write(f'{ctx.type_().getText()}         ')
-            self.output.write(f'{width}        \n')
+            if addon:
+                self.output.write(f'{width + addon}        \n')
+                addon = 0
+
+            elif multon:
+                self.output.write(f'{width * multon}         \n')
+                multon = 0
+
+            else:
+                self.output.write(f'{width}         \n')
 
     def enterComponent(self, ctx:LULU2Parser.ComponentContext):
         pass
@@ -109,11 +113,15 @@ class LULU2SymbolTableListener(LULU2Listener):
                     self.output.write("loop scope         \n")
 
     def exitFun_def(self, ctx:LULU2Parser.Fun_defContext):
+        width = alocate_width(ctx)
         self.output.write("----End of %s----\n\n"%ctx.ID().getText())
 
     def enterArgs_var(self, ctx:LULU2Parser.Args_varContext):
+        width = alocate_width(ctx)
+
         self.output.write(f'{ctx.ID().getText()}         ')
-        self.output.write(f'{ctx.type_().getText()}         \n')
+        self.output.write(f'{ctx.type_().getText()}         ')
+        self.output.write(f'{width}         \n')
 
     def enterStmt(self, ctx:LULU2Parser.StmtContext):
         pass

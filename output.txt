@@ -1,15 +1,15 @@
 ----program----
 ----testing----
 Name    |    Type    |    Width    |    Address
-x         int         
-y         int         
+x         int         4         
+y         int         4         
 ----End of testing----
 
 ----start----
 Name    |    Type    |    Width    |    Address
-arg         int         
-a         string         
-x         int         4        
+arg         int         4         
+a         string         2         
+x         int         4         
 ----End of start----
 
 ---End of program----
