@@ -6,7 +6,7 @@ from LULU2Listener import LULU2Listener
 
 def alocate_array_width(array):
     if type(array) == str:
-        return len(array)*2
+        return len(array)*2+2
     else:
         return len(array)
 
@@ -20,7 +20,7 @@ def alocate_width(ctx):
     # for use in type_def()
     elif isinstance(ctx, LULU2Parser.Type_defContext):
         return 20
-    
+
     # for use in var_def() and args_var()
     elif isinstance(ctx, LULU2Parser.Var_defContext) or isinstance(ctx, LULU2Parser.Args_varContext):
         if ctx.type_().Int():
@@ -74,10 +74,10 @@ class LULU2SymbolTableListener(LULU2Listener):
             if ctx.type_().String():
                 if value.expr().const_val():
                     addon = alocate_array_width(value.expr().getText())
-            
+
             # calculation of arrays
             if value.ref().expr():
-                multon = alocate_array_width(value.ref().expr())
+                multon = alocate_array_width(value.ref().expr().getText())
 
             self.output.write(f'{value.ref().ID().getText()}         ')
             self.output.write(f'{ctx.type_().getText()}         ')
@@ -101,7 +101,7 @@ class LULU2SymbolTableListener(LULU2Listener):
     def enterFun_def(self, ctx:LULU2Parser.Fun_defContext):
         self.output.write("----%s----\n"%ctx.ID().getText())
         self.output.write('Name    |    Type    |    Width    |    Address\n')
-    
+
         definition = ctx.block()
         if definition.stmt():
             for statement in definition.stmt():
