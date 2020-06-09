@@ -45,7 +45,9 @@ class LULU2SymbolTableListener(LULU2Listener):
         self.address_stack.append(self.global_offset)
 
     def exitProgram(self, ctx:LULU2Parser.ProgramContext):
-        self.output.write(f'width = {self.global_offset}\n')
+        self.output.write(f'width = {self.global_offset}')
+        self.output.write('        Address = 0\n')
+
         self.output.write('---End of program----\n')
 
     def enterFt_def(self, ctx:LULU2Parser.Ft_defContext):
@@ -70,13 +72,15 @@ class LULU2SymbolTableListener(LULU2Listener):
         final = self.global_offset - start
         width += final
         self.global_offset += alocate_width(ctx)
-        self.output.write(f'width = {width}\n')
+        self.output.write(f'width = {width}')
+        self.output.write(f'        Address = {start}\n')
         self.output.write("----End of %s----\n\n"%ctx.ID()[0].getText())
 
     def enterVar_def(self, ctx:LULU2Parser.Var_defContext):
         addon = 0
         multon = 0
         width = alocate_width(ctx)
+        start = self.address_stack[len(self.address_stack) - 1]
 
         for value in ctx.var_val():
             # calculating string const
@@ -91,17 +95,20 @@ class LULU2SymbolTableListener(LULU2Listener):
             self.output.write(f'{value.ref().ID().getText()}         ')
             self.output.write(f'{ctx.type_().getText()}         ')
             if addon:
-                self.output.write(f'{width + addon}        \n')
-                self.global_offset += width+addon
+                self.output.write(f'{width + addon}        ')
+                self.output.write(f'         {self.global_offset - start}\n')
+                self.global_offset += width + addon
                 addon = 0
 
             elif multon:
-                self.output.write(f'{width * multon}         \n')
-                self.global_offset += width+multon
+                self.output.write(f'{width * multon}         ')
+                self.output.write(f'         {self.global_offset - start}\n')
+                self.global_offset += width + multon
                 multon = 0
 
             else:
-                self.output.write(f'{width}         \n')
+                self.output.write(f'{width}         ')
+                self.output.write(f'         {self.global_offset - start}\n')
                 self.global_offset += width
 
     def enterComponent(self, ctx:LULU2Parser.ComponentContext):
@@ -131,15 +138,18 @@ class LULU2SymbolTableListener(LULU2Listener):
         final = self.global_offset - start
         width += final
         self.global_offset += alocate_width(ctx)
-        self.output.write(f'width = {width}\n')
+        self.output.write(f'width = {width}')
+        self.output.write(f'         Address = {start}\n')
         self.output.write("----End of %s----\n\n"%ctx.ID().getText())
 
     def enterArgs_var(self, ctx:LULU2Parser.Args_varContext):
         width = alocate_width(ctx)
+        start = self.address_stack[len(self.address_stack) - 1]
 
         self.output.write(f'{ctx.ID().getText()}         ')
         self.output.write(f'{ctx.type_().getText()}         ')
-        self.output.write(f'{width}         \n')
+        self.output.write(f'{width}         ')
+        self.output.write(f'        {self.global_offset - start}\n')
         self.global_offset += width
 
     def enterStmt(self, ctx:LULU2Parser.StmtContext):
@@ -158,7 +168,7 @@ class LULU2SymbolTableListener(LULU2Listener):
         if ctx.block():
             start = self.address_stack.pop()
             final = self.global_offset - start
-            self.output.Write(f' width = {final}\n')
+            self.output.write(f' width = {final}        Address = {start}\n')
             self.output.write(f'----End of {ctx.getText()}----\n\n')
 
     def enterSwitch_body(self, ctx:LULU2Parser.Switch_bodyContext):
@@ -169,7 +179,7 @@ class LULU2SymbolTableListener(LULU2Listener):
     def exitSwitch_body(self, ctx:LULU2Parser.Switch_bodyContext):
         start = self.address_stack.pop()
         final = self.global_offset - start
-        self.output.write(f' width = {final}\n')
+        self.output.write(f' width = {final}        Address = {start}\n')
         self.output.write("----End of %s----\n\n"%ctx.getText())
 
     def enterLoop_stmt(self, ctx:LULU2Parser.Loop_stmtContext):
@@ -182,5 +192,5 @@ class LULU2SymbolTableListener(LULU2Listener):
         if ctx.block():
             start = self.address_stack.pop()
             final = self.global_offset - start
-            self.output.write(f' width = {final}\n')
+            self.output.write(f' width = {final}        Address = {start}\n')
             self.output.write(f'----End of {ctx.getText}----\n\n')

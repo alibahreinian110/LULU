@@ -1,18 +1,18 @@
 ----program----
 ----testing----
 Name    |    Type    |    Width    |    Address
-x         int         4         
-y         int         4         
-width = 38
+x         int         4                 0
+y         int         4                 4
+width = 38         Address = 0
 ----End of testing----
 
 ----start----
 Name    |    Type    |    Width    |    Address
-arg         int         4         
-a         string         2         
-x         int         4         
-width = 40
+arg         int         4                 0
+a         string         2                 4
+x         int         4                  6
+width = 40         Address = 38
 ----End of start----
 
-width = 78
+width = 78        Address = 0
 ---End of program----
