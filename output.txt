@@ -3,6 +3,7 @@
 Name    |    Type    |    Width    |    Address
 x         int         4         
 y         int         4         
+width = 38
 ----End of testing----
 
 ----start----
@@ -10,6 +11,8 @@ Name    |    Type    |    Width    |    Address
 arg         int         4         
 a         string         2         
 x         int         4         
+width = 40
 ----End of start----
 
+width = 78
 ---End of program----

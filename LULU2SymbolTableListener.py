@@ -69,6 +69,7 @@ class LULU2SymbolTableListener(LULU2Listener):
         start = self.address_stack.pop()
         final = self.global_offset - start
         width += final
+        self.global_offset += alocate_width(ctx)
         self.output.write(f'width = {width}\n')
         self.output.write("----End of %s----\n\n"%ctx.ID()[0].getText())
 
@@ -129,6 +130,7 @@ class LULU2SymbolTableListener(LULU2Listener):
         start = self.address_stack.pop()
         final = self.global_offset - start
         width += final
+        self.global_offset += alocate_width(ctx)
         self.output.write(f'width = {width}\n')
         self.output.write("----End of %s----\n\n"%ctx.ID().getText())
 
