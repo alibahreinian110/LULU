@@ -43,8 +43,15 @@ class LULU2AnalyzerListener(LULU2Listener):
                 flag = False
             elif isinstance(child, LULU2Parser.Args_varContext) and not flag:
                 input_types.append(child.getText())
+
+        doesnt_exist = True
+
+        for func in self.functions:
+            if func.name == name and fun.inputs == input_types and fun.outputs == output_types:
+                doesnt_exist = False
         
-        func = function(name, input_types, output_types)
+        if doesnt_exit:
+            func = function(name, input_types, output_types)
         self.functions.append(func)
         
     def enterVar_def(self, ctx:LULU2Parser.Var_defContext):
