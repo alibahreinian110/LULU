@@ -1,8 +1,13 @@
+type myclass {
+  public int kir;
+}
+
 (int x) = function testing(int y) {
   x = y;
 }
 
 (int arg) = function start(string a) {
   int x = testing(4);
+  myclass nemune;
 }
 

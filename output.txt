@@ -1,9 +1,15 @@
 ----program----
+----myclass----
+Name    |    Type    |    Width    |    Address
+kir         int         4                  0
+width = 24        Address = 0
+----End of myclass----
+
 ----testing----
 Name    |    Type    |    Width    |    Address
 x         int         4                 0
 y         int         4                 4
-width = 38         Address = 0
+width = 38         Address = 24
 ----End of testing----
 
 ----start----
@@ -11,8 +17,9 @@ Name    |    Type    |    Width    |    Address
 arg         int         4                 0
 a         string         2                 4
 x         int         4                  6
-width = 40         Address = 38
+nemune         myclass         0                  10
+width = 40         Address = 62
 ----End of start----
 
-width = 78        Address = 0
+width = 102        Address = 0
 ---End of program----
