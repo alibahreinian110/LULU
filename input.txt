@@ -2,11 +2,17 @@ type myclass {
   public int kir;
 }
 
-(int x) = function testing(int y) {
-  x = y;
+(int x) = function testing(int y, int z) {
+  z = z + y;
+  x = z;
+}
+
+function testing_handle_call() {
+  int ziba;
 }
 
 (int arg) = function start(string a) {
-  int x = testing(4);
+  int x;
+  (x) = testing(4, 7);
   myclass nemune;
 }

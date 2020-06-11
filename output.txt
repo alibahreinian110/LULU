@@ -1,4 +1,4 @@
-reference to notDefined not found. may be you forgot to define it
+function testing gets 1 but got less
 ----program----
 ----myclass----
 Name    |    Type    |    Width    |    Address
@@ -9,9 +9,16 @@ width = 24        Address = 0
 ----testing----
 Name    |    Type    |    Width    |    Address
 x         int         4                 0
-y         int         4                 4
-width = 38         Address = 24
+z         int         4                 4
+y         int         4                 8
+width = 42         Address = 24
 ----End of testing----
+
+----testing_handle_call----
+Name    |    Type    |    Width    |    Address
+ziba         int         4                  0
+width = 34         Address = 66
+----End of testing_handle_call----
 
 ----start----
 Name    |    Type    |    Width    |    Address
@@ -19,8 +26,8 @@ arg         int         4                 0
 a         string         2                 4
 x         int         4                  6
 nemune         myclass         4                  10
-width = 44         Address = 62
+width = 44         Address = 100
 ----End of start----
 
-width = 106        Address = 0
+width = 144        Address = 0
 ---End of program----
