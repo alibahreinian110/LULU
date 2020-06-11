@@ -50,7 +50,7 @@ class LULU2AnalyzerListener(LULU2Listener):
             if func.name == name and fun.inputs == input_types and fun.outputs == output_types:
                 doesnt_exist = False
         
-        if doesnt_exit:
+        if doesnt_exist:
             func = function(name, input_types, output_types)
         self.functions.append(func)
         
@@ -59,8 +59,16 @@ class LULU2AnalyzerListener(LULU2Listener):
 
         for value in ctx.var_val():
             variable = value.ref().ID().getText()
+            flag = True
 
-        self.variables.append(variable)
+            if variable != 'Destruct' and variable != 'Allocate' and variable != 'read' and variable != 'write' and variable not in self.types and variable:
+                for func in self.functions:
+                    if variable == func.name:
+                        flag = False
+                        break
+                
+                if flag:
+                    self.variables.append(variable)
 
         name = ctx.type_().getText()
         if name not in self.types:
@@ -71,7 +79,15 @@ class LULU2AnalyzerListener(LULU2Listener):
 
     def enterArgs_var(self, ctx:LULU2Parser.Args_varContext):
         variable = ctx.ID().getText()
-        self.variables.append(variable)
+        flag = True
+
+        if variable != 'Destruct' and variable != 'Allocate' and variable != 'read' and variable != 'write' and variable not in self.types and variable:
+            for func in self.functions:
+                if func.name == variable:
+                    flag = False
+
+        if flag:    
+            self.variables.append(variable)
 
         name = ctx.type_().getText()
         if name not in self.types:
