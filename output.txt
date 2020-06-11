@@ -1,3 +1,4 @@
+reference to notDefined not found. may be you forgot to define it
 ----program----
 ----myclass----
 Name    |    Type    |    Width    |    Address
