@@ -17,9 +17,9 @@ Name    |    Type    |    Width    |    Address
 arg         int         4                 0
 a         string         2                 4
 x         int         4                  6
-nemune         myclass         0                  10
-width = 40         Address = 62
+nemune         myclass         4                  10
+width = 44         Address = 62
 ----End of start----
 
-width = 102        Address = 0
+width = 106        Address = 0
 ---End of program----

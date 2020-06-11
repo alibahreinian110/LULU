@@ -30,6 +30,8 @@ def alocate_width(ctx):
             return 8
         elif ctx.type_().String():
             return 2
+        elif ctx.type_().ID():
+            return 4
         else:
             return 0
 

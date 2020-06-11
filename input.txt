@@ -10,4 +10,3 @@ type myclass {
   int x = testing(4);
   myclass nemune;
 }
-
