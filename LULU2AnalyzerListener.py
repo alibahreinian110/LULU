@@ -21,8 +21,12 @@ class LULU2AnalyzerListener(LULU2Listener):
         self.variables = []
         self.functions = []
 
-    def exitType_def(self, ctx:LULU2Parser.Type_defContext):
-        self.types.append(ctx.ID()[0].getText())
+    def enterType_def(self, ctx:LULU2Parser.Type_defContext):
+        if ctx.ID()[0].getText() not in self.types:
+            self.types.append(ctx.ID()[0].getText())
+        else:
+            self.output.write(f'type with name {ctx.ID()[0].getText()} already exists')
+        
 
     def enterFun_def(self, ctx:LULU2Parser.Fun_defContext):
         input_types = []
